@@ -3,6 +3,7 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "sonner";
 import FloatingShapes from "@/components/floating-shapes";
+import Header from "@/components/Header";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,7 +22,7 @@ export default function RootLayout({ children }) {
           enableSystem
           disableTransitionOnChange
         >
-            {/* <Header /> */}
+            <Header />
           <main className="bg-slate-900 min-h-screen text-white overflow-x-hidden">
           <FloatingShapes />
             <Toaster richColors/>
