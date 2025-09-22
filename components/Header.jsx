@@ -1,9 +1,11 @@
 "use client";
 
+import { SignedIn, SignedOut, SignInButton, SignUpButton, UserButton } from "@clerk/nextjs";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React from "react";
+import { Button } from "./ui/button";
 
 const Header = () => {
   const path = usePathname();
@@ -44,7 +46,23 @@ const Header = () => {
         )}
 
         <div className="flex items-center gap-3 ml-10 md:ml-20">
-            Auth
+            <SignedOut>
+              <SignInButton>
+                <Button variant="glass" className="hidden sm:flex">
+                  Sign In
+                </Button>
+              </SignInButton>
+              <SignUpButton>
+                <Button variant="primary">Get Started</Button>
+              </SignUpButton>
+            </SignedOut>
+            <SignedIn>
+              <UserButton appearance={{
+                elements:{
+                  
+                }
+              }} />
+            </SignedIn>
         </div>
       </div>
     </header>
