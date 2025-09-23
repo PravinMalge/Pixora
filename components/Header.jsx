@@ -12,9 +12,19 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React from "react";
 import { Button } from "./ui/button";
+import { useStoreUserEffect } from "@/hooks/useStoreUserEffect";
+import { BarLoader } from "react-spinners";
+import {Unauthenticated, Authenticated} from "convex/react"
+
+
 
 const Header = () => {
   const path = usePathname();
+  const {isLoading} = useStoreUserEffect();
+  if(path.includes("/editor")){
+    return null; // Hide header for editor pages
+  }
+
   return (
     <header className="fixed top-6 left-1/2 transform -translate-x-1/2 z-50 text-nowrap">
       <div className="backdrop-blur-md bg-white/10 border-white/20 rounded-full justify-between px-8 py-3 flex items-center gap-8">
@@ -52,7 +62,7 @@ const Header = () => {
         )}
 
         <div className="flex items-center gap-3 ml-10 md:ml-20">
-          <SignedOut>
+          <Unauthenticated>
             <SignInButton>
               <Button variant="glass" className="hidden sm:flex">
                 Sign In
@@ -61,8 +71,8 @@ const Header = () => {
             <SignUpButton>
               <Button variant="primary">Get Started</Button>
             </SignUpButton>
-          </SignedOut>
-          <SignedIn>
+          </Unauthenticated>
+          <Authenticated>
             <UserButton
               appearance={{
                 elements: {
@@ -70,8 +80,14 @@ const Header = () => {
                 },
               }}
             />
-          </SignedIn>
+          </Authenticated>
         </div>
+
+        {isLoading && (
+          <div className="fixed bottom-0 left-0 w-full z-40 flex justify-center">
+            <BarLoader width={"95%"} color="#06b6d4"/>
+          </div>
+        )}
       </div>
     </header>
   );
