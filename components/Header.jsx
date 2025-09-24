@@ -1,8 +1,6 @@
 "use client";
 
 import {
-  SignedIn,
-  SignedOut,
   SignInButton,
   SignUpButton,
   UserButton,
@@ -15,6 +13,7 @@ import { Button } from "./ui/button";
 import { useStoreUserEffect } from "@/hooks/useStoreUserEffect";
 import { BarLoader } from "react-spinners";
 import {Unauthenticated, Authenticated} from "convex/react"
+import { LayoutDashboard } from "lucide-react";
 
 
 
@@ -64,7 +63,7 @@ const Header = () => {
         <div className="flex items-center gap-3 ml-10 md:ml-20">
           <Unauthenticated>
             <SignInButton>
-              <Button variant="glass" className="hidden sm:flex">
+              <Button variant="glass">
                 Sign In
               </Button>
             </SignInButton>
@@ -72,6 +71,12 @@ const Header = () => {
               <Button variant="primary">Get Started</Button>
             </SignUpButton>
           </Unauthenticated>
+          <Link href="/dashboard">
+              <Button variant="glass" className="hidden sm:flex">
+                <LayoutDashboard className="h-4 w-4" />
+                <span className="hidden md:flex">Dashboard</span>
+              </Button>
+          </Link>
           <Authenticated>
             <UserButton
               appearance={{
